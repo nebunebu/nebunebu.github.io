@@ -1,12 +1,62 @@
-html {
-  background-color: #000000;
+@font-face {
+    font-family: 'IBM_BIOS';
+    src:  url('fonts/Ac437_IBM_BIOS.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'IBM_DOS_ISO8';
+    src:  url('fonts/Px437_IBM_DOS_ISO8.ttf') format('truetype');
+}
+
+html, body {
+  position: fixed;
+  width: 100vw;
+  color: gainsboro;
+  font-family: IBM_DOS_ISO8;
+}
+
+* {
+  background-color: black;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+a {
+  font-family: 'IBM_BIOS';
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 h1 {
-  color: #008b94;
+  font-family: 'IBM_BIOS';
+  color: teal;
+  text-align:center;
+  font-size: 35px;
+}
 
+h2 {
+  font-family: 'IBM_BIOS';
+  color: pink;
+  font-size: 20px;
 }
 
 p {
-  color: #a0b3cf;
+  color: gainsboro;
+  font-family: 'IBM_DOS_ISO8';
+  font-size: 20px;
 }
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  color: gainsboro;
+}
+
