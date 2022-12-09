@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon-16x16.png"/>
+    <link rel=stylesheet href="../style.css"/>
+    <script src="../script.js"></script>
+  </head>
+  <body>
+    <main-header></main-header>
+    <h1>Writings</h1>
+    <h2>On the Name</h2>
+    <p>
+      Online I tend to go by the name nebu. It is a shortened form of Nebuchadnezzar.
+      Originally, I chose it because of the idiom 
+      <a href="https://en.wikipedia.org/wiki/Feet_of_clay">feet of clay</a>,
+      which is an allusion to the biblical book of Daniel.
+    </p>
+    <p>
+      I am not sure of the connection between the idiom and the biblical story, since
+      in the biblical story Nebuchadnezzar's dream is explicitly interpreted to signify
+      the different stages of the Babyolonian empire and the idiom refers to a person
+      having a fatal character flaw.
+    </p>
+    <p>
+      Since I've adopted the name, which was roughly two years ago, I have had a lot
+      of people speculate at its meaning. Most common is that it is derived from "nebula".
+      More interesting is that it means nothingness or nonexistence
+      in Kurdish. But most translations I find of these songs say that it means, "no"
+      or "don't".
+    </p>
+    <p>
+      I am under the assumption that there is a similar meaning in many of the Indo-Iranian
+      languages.
+    </p>
+    <p>
+      In the Slavic languages, the word tends to refer to the sky. I think that there is
+      a shared etymology here with the English word "nebula".
+    </p>
+    <p>
+      Funnily in some languages, like Swahili, the word means stupid, and in Roma, 
+      it means a fool or crazy person. I would be surprised if the two here were
+      etymologically related.
+    </p>
+    <p>
+      In the course of writing, this I wrote a little bash script using 
+      <a href="https://github.com/soimort/translate-shell">translate-shell</a>
+      to translate words from other languages into English.
+    </p>
+    <div class="highlight">
+      <pre tabindex="0" class="chroma">
+          <code class="language-fallback" data-lang="bash">
+  #!/bin/bash
+
+  languages=( \
+    "af" "am" "ar" "as" "ay" "az" "ba" \
+    "be" "bg" "bho" "bm" "bn" "bo" "bs" \
+    "ca" "ceb" "ckb" "co" "cs" "cv" "cy" \
+    "da" "de" "doi" "dv" "ee" "el" "en" \
+    "eo" "es" "et" "eu" "fa" "fi" "fj" \
+    "fo" "fr" "fr-CA" "fy" "ga" "gd" "gl" \
+    "gn" "gom" "gu" "ha" "haw" "he" "hi" \
+    "hmn" "hr" "hsb" "ht" "hu" "hy" "id" \
+    "ig" "ikt" "ilo" "is" "it" "iu" "iu-Latn" \
+    "ja" "jv" "ka" "kk" "km" "kn" "ko" \
+    "kri" "ku" "ky" "la" "lb" "lg" "ln" \
+    "lo" "lt" "lus" "lv" "lzh" "mai" "mg" \
+    "mhr" "mi" "mk" "ml" "mn" "mn-Mong" "mni-Mtei" \
+    "mr" "mrj" "ms" "mt" "my" "ne" "nl" \
+    "no" "nso" "ny" "om" "or" "otq" "pa" \
+    "pap" "pl" "prs" "ps" "pt-BR" "pt-PT" "qu" \
+    "ro" "ru" "rw" "sa" "sah" "sd" "si" \
+    "sk" "sl" "sm" "sn" "so" "sq" "sr-Cyrl" \
+    "sr-Latn" "st" "su" "sv" "sw" "ta" "te" \
+    "tg" "th" "ti" "tk" "tl" "tlh-Latn" "to" \
+    "tr" "ts" "tt" "tw" "ty" "udm" "ug" \
+    "uk" "ur" "uz" "vi" "xh" "yi" "yo" \
+    "yua" "yue" "zh-CN" "zh-TW" "zu"   \
+    )
+
+  for l in "${languages[@]}"; do
+    res=$(trans -no-auto -no-ansi -b "$l":en "$1" 2> /dev/null)
+    if [[ "$res" != "$1" ]] && [[ "$res" != "${1^}" ]] && [[ -n "$res" ]]; then 
+      translation=$(trans -no-auto -no-ansi "$l":en "$1" 2> /dev/null)
+      echo "$l"
+      echo "$translation" | sed -e '/Definitions*/d' \
+        -e '/Translations*/d' \
+        -e 's/ -> English//' \
+        -e 's/\t//' \
+        -e "/^${1}/d" \
+        -e '/^$/d' | tail -n +2
+      echo "---------------------------------------------"
+    fi
+  done
+          </code>
+      </pre>
+    </div>
+    <p>
+      This script, as it is, is very inefficent. But it works. It accepts a string
+      as an argument. And uses the <strong>translate-shell</strong>tool to query the
+      Google Translate API, looping through an array of language codes, translating
+      from the source language to English. If the query returns a value that is not 
+      the same as the original argument passed, that argument capitalized, and is not
+      and empty string, it requeries for verbose output. That verbose output is then
+      edited with sed.
+    </p>
+
+    <p>
+      The output for nebu is as follows:
+    </p>
+
+    <div class="tab">
+      be</br>
+      [ беларуская ]</br>
+          in the sky, nebu</br>
+      ---------------------------------------------</br>
+      bs</br>
+      [ Bosanski ]</br>
+          to the sky, the sky</br>
+      ---------------------------------------------</br>
+      ca</br>
+      [ Català ]</br>
+          cloud, mist</br>
+      ---------------------------------------------</br>
+      co</br>
+      [ Corsu ]</br>
+          cloud, fog</br>
+      ---------------------------------------------</br>
+      cs</br>
+      [ Čeština ]</br>
+          the sky, heaven</br>
+      ---------------------------------------------</br>
+      de</br>
+      [ Deutsch ]</br>
+          nope, nebu</br>
+      ---------------------------------------------</br>
+      et</br>
+      [ Eesti ]</br>
+          dude, nebu</br>
+      ---------------------------------------------</br>
+      gl</br>
+      [ Galego ]</br>
+          cloud, nebu</br>
+      ---------------------------------------------</br>
+      hmn</br>
+      [ Hmoob ]</br>
+          sky, the sky</br>
+      ---------------------------------------------</br>
+      hr</br>
+      [ Hrvatski ]</br>
+      noun</br>
+          sky</br>
+              nebo</br>
+          heaven</br>
+              raj, nebeski svod</br>
+          heavens</br>
+              nebo, vasiona</br>
+          to the sky, the sky</br>
+      ---------------------------------------------</br>
+      hy</br>
+          nebu:, Nebu</br>
+      ---------------------------------------------</br>
+      jv</br>
+      [ Basa Jawa ]</br>
+          sky, the sky</br>
+      ---------------------------------------------</br>
+      ku</br>
+      [ Kurmancî ]</br>
+          don't, no</br>
+      ---------------------------------------------</br>
+      la</br>
+      [ Latina ]</br>
+          in the sky, in heaven's name</br>
+      ---------------------------------------------</br>
+      lt</br>
+      [ Lietuvių ]</br>
+          no, don't</br>
+      ---------------------------------------------</br>
+      lv</br>
+      [ Latviešu ]</br>
+          don't, nope</br>
+      ---------------------------------------------</br>
+      lzh</br>
+      [ 文言 ]</br>
+      ---------------------------------------------</br>
+      ro</br>
+      [ Română ]</br>
+          folly, crazy, mad</br>
+      ---------------------------------------------</br>
+      rw</br>
+      [ Ikinyarwanda ]</br>
+          heaven, sky</br>
+      ---------------------------------------------</br>
+      sk</br>
+      [ Slovenčina ]</br>
+      noun</br>
+          sky</br>
+              obloha, nebo, podnebie, ovzdušie, vzdušný priestor, oblak</br>
+          heaven</br>
+              nebo, blažený stav, obloha, pocit</br>
+          canopy</br>
+              baldachýn, klenba, nebo, plátenná strecha, priehľadný kryt pilota, prístrešok</br>
+          sphere</br>
+              kruhy, dosah, glóbus, guľa, rezort, nebo</br>
+          the sky, to heaven</br>
+      ---------------------------------------------</br>
+      sl</br>
+      [ Slovenščina ]</br>
+          to the sky, the sky</br>
+      ---------------------------------------------</br>
+      sn</br>
+      [ chiShona ]</br>
+          with the sky, with the cloud</br>
+      ---------------------------------------------</br>
+      sr-Cyrl</br>
+      [ Српски ]</br>
+      noun</br>
+          sky</br>
+              небо</br>
+          heaven</br>
+              небо, небески свод, рај</br>
+          heavens</br>
+              небо, васиона</br>
+          to the sky, to heaven</br>
+      ---------------------------------------------</br>
+      sr-Latn</br>
+      [ Srpski ]</br>
+      ---------------------------------------------</br>
+      su</br>
+      [ Basa Sunda ]</br>
+          cane, nebu, the sky</br>
+      ---------------------------------------------</br>
+      sw</br>
+      [ Kiswahili ]</br>
+          stupid, nebu</br>
+      ---------------------------------------------</br>
+      tr</br>
+      [ Türkçe ]</br>
+          What's this, nebu</br>
+      ---------------------------------------------</br>
+      uk</br>
+      [ Українська ]</br>
+          in the sky, nebu</br>
+      ---------------------------------------------</br>
+      xh</br>
+      [ isiXhosa ]</br>
+          with you, with me</br>
+      ---------------------------------------------</br>
+      zu</br>
+      [ isiZulu ]</br>
+          with you, no</br>
+      ---------------------------------------------</br>
+    </div>
+
+    <p>
+      Noticably, there are some errors with this output. Litarary Chinese (lzh) has its
+      value missing for instance.
+    </p>
+
+    <p>
+      I don't have any intention to write this at the moment. I had thought that
+      writing about the name "nebu" would be an easy first post and got curious
+      about what the word means in other languages.
+    </p>
+
+  </body>
+</html>

@@ -11,8 +11,21 @@
 html, body {
   position: fixed;
   width: 100vw;
+  height: 100vh;
   color: gainsboro;
   font-family: IBM_DOS_ISO8;
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  background: black;
+}
+
+/* ::-webkit-scrollbar-track { } */
+
+::-webkit-scrollbar-thumb {
+  background: gainsboro;
 }
 
 * {
@@ -21,10 +34,11 @@ html, body {
 
 .underline {
   text-decoration: underline;
+  font-size: 20px;
 }
 
 a {
-  font-family: 'IBM_BIOS';
+  font-family: 'IBM_DOS_ISO8';
   color: blue;
   text-decoration: none;
 }
