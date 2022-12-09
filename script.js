@@ -4,7 +4,7 @@ class Header extends HTMLElement {
     <nav>
       <div class="navbar">
         <a href="/index.html" class="underline">home</a>
-        <a href="/writings.html" class="underline">writing</a>
+        <a href="/writings.html" class="underline">writings</a>
         <a href="/about.html" class="underline">about</a>
       </div>
     </nav>
